@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     
+     <script>
+
+        const lista = [13,12,45,0,23]
+
+        function array(lista) {
+            let maior = lista[0];
+            let menor = lista[0];
+            let soma = 0;
+
+            for (let i = 0; i < lista.length; i++) {
+                if (lista[i] > maior) {
+                    maior = lista[i];
+                }
+                if (lista[i] < menor) {
+                    menor = lista[i];
+                }
+                soma += lista[i];
+            }
+
+            const media = soma / lista.length;
+
+            return {
+                maior: maior,
+                menor: menor,
+                media: media
+            };
+        }
+
+        const resultado = array(lista);
+        console.log(resultado);
+
+     </script>
+
+.
+</body>
+</html>

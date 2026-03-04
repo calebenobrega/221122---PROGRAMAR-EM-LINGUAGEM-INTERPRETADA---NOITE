@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        let produtos = [
+            ["Produto", "Preco", "Categoria"],
+            ["Maçã", 3.50, "Fruta"],
+            ["Arroz", 15.00, "Grao"],
+            ["Leite", 6.00, "Bebida"]
+        ];
+
+        console.table("Tabela de produtos Inicial:", produtos);
+
+        produtos.push(["Feijão", 8.00, "Grao"]);
+
+        console.table("Tabela de produtos com nova linha:", produtos);
+
+        produtos[0].push("Estoque");
+
+            for (let i = 1; i < produtos.length; i++) {
+                let estoque = prompt(`Informe o estoque para ${produtos[i][0]}:`);
+                produtos[i].push(estoque);
+            }
+
+        console.table(produtos);
+    </script>
+
+</body>
+</html>

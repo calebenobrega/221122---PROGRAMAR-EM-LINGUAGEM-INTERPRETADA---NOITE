@@ -30,7 +30,7 @@ Nome  Idade  Cidade
 Ana     20     SP
 Carlos  32    RJ
  
-1. Parâmetros de funções
+3. Parâmetros de funções
 
 Crie uma funcao que receba um array de
 números e retorne:
