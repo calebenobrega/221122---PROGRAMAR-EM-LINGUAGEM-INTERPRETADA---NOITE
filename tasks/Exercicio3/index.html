@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercicio 3</title>
+    <style>
+      :root {
+        --fundo-cartao: #ffffff;
+        --texto: #1f2937;
+        --borda: #d1d5db;
+        --primaria: #2563eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--texto);
+        background-color: #f8f9fa;
+      }
+
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      .bloco {
+        background: var(--fundo-cartao);
+        border: 1px solid var(--borda);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 14px;
+      }
+
+      .linha {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        background: var(--primaria);
+        color: #fff;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+
+      input {
+        border: 1px solid var(--borda);
+        border-radius: 8px;
+        padding: 10px;
+        min-width: 240px;
+      }
+
+      #quadrado {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+      }
+
+      ul {
+        margin: 12px 0 0;
+        padding-left: 20px;
+      }
+
+      .oculto {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Exercicios de Eventos</h1>
+
+      <section class="bloco">
+        <h2>1. Mudar cor de fundo</h2>
+        <button id="mudar-cor" type="button">Mudar cor de fundo</button>
+      </section>
+
+      <section class="bloco">
+        <h2>2. Quadrado com evento de mouse</h2>
+        <p>Passe o mouse no quadrado para aumentar o tamanho.</p>
+        <div id="quadrado"></div>
+      </section>
+
+      <section class="bloco">
+        <h2>3. Texto em tempo real</h2>
+        <div class="linha">
+          <label for="texto-usuario">Digite algo:</label>
+          <input id="texto-usuario" type="text" placeholder="Escreva aqui" />
+        </div>
+        <p>Voce digitou: <span id="texto-em-tempo-real"></span></p>
+      </section>
+
+      <section class="bloco">
+        <h2>4. Lista com novos itens</h2>
+        <div class="linha">
+          <input id="novo-item" type="text" placeholder="Novo item da lista" />
+          <button id="adicionar-item" type="button">Adicionar</button>
+        </div>
+        <ul id="lista-itens"></ul>
+      </section>
+
+      <section class="bloco">
+        <h2>5. Exibir/Ocultar elemento (Toggle)</h2>
+        <button id="alternar-elemento" type="button">Ocultar elemento</button>
+        <p id="elemento-toggle">Este texto pode ser exibido ou ocultado.</p>
+      </section>
+    </main>
+
+    <script>
+      // 1) Mudar cor de fundo
+      const botaoMudarCor = document.getElementById("mudar-cor");
+      const cores = ["#f8f9fa", "#ffe8cc", "#d8f3dc", "#dbeafe", "#fce7f3"];
+      let indiceCor = 0;
+
+      botaoMudarCor.addEventListener("click", () => {
+        indiceCor = (indiceCor + 1) % cores.length;
+        document.body.style.backgroundColor = cores[indiceCor];
+      });
+
+      // 2) Evento no quadrado ao passar o mouse
+      const quadrado = document.getElementById("quadrado");
+      quadrado.addEventListener("mouseenter", () => {
+        quadrado.style.width = parseInt(quadrado.style.width, 10) + 10 + "px";
+        quadrado.style.height = parseInt(quadrado.style.height, 10) + 10 + "px";
+      });
+
+      // 3) Mostrar texto em tempo real
+      const campoTexto = document.getElementById("texto-usuario");
+      const textoEmTempoReal = document.getElementById("texto-em-tempo-real");
+
+      campoTexto.addEventListener("input", () => {
+        textoEmTempoReal.textContent = campoTexto.value;
+      });
+
+      // 4) Adicionar itens na lista
+      const campoNovoItem = document.getElementById("novo-item");
+      const botaoAdicionarItem = document.getElementById("adicionar-item");
+      const listaItens = document.getElementById("lista-itens");
+
+      botaoAdicionarItem.addEventListener("click", () => {
+        const textoItem = campoNovoItem.value.trim();
+
+        if (!textoItem) {
+          campoNovoItem.focus();
+          return;
+        }
+
+        const item = document.createElement("li");
+        item.textContent = textoItem;
+        listaItens.appendChild(item);
+
+        campoNovoItem.value = "";
+        campoNovoItem.focus();
+      });
+
+      // 5) Toggle de exibir/ocultar elemento
+      const botaoAlternarElemento =
+        document.getElementById("alternar-elemento");
+      const elementoToggle = document.getElementById("elemento-toggle");
+
+      botaoAlternarElemento.addEventListener("click", () => {
+        elementoToggle.classList.toggle("oculto");
+
+        const estaOculto = elementoToggle.classList.contains("oculto");
+        botaoAlternarElemento.textContent = estaOculto
+          ? "Exibir elemento"
+          : "Ocultar elemento";
+      });
+    </script>
+  </body>
+</html>

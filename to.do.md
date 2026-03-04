@@ -55,3 +55,14 @@ Agora:
 1. Adicione uma nova linha via prompt.
 2. Adicione uma nova coluna chamada "Estoque".
 3. Peça ao usuario para informar o estoque de cada produto.
+
+
+Exercicio 3 
+
+1- Criar um botão que muda a cor de fundo da página.
+2- Criar um quadrado que aumenta de tamanho quando o mouse passa
+por cima.
+3- Criar um campo de texto que mostra em tempo real o que o usuário
+digita.
+4- Criar uma lista onde novos itens aparecem ao clicar em um botão.
+5- Criar um botão que alterna exibir/ocultar um elemento (toggle).
