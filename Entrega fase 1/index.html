@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Hortifruti</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h1>CRUD Hortifruti</h1>
+        <p class="subtitle">
+          Bem-vindo ao sistema de gerenciamento de estoque!
+        </p>
+
+        <!-- Acoes principais do CRUD -->
+        <div class="button-menu">
+          <button class="btn btn-primary" onclick="adicionarFruta()">
+            Adicionar Fruta
+          </button>
+          <button class="btn btn-primary" onclick="listarTudo()">
+            Listar Tudo
+          </button>
+          <button class="btn btn-primary" onclick="listarPorId()">
+            Listar por ID
+          </button>
+          <button class="btn btn-success" onclick="editarFruta()">
+            Editar Fruta
+          </button>
+          <button class="btn btn-danger" onclick="deletarFruta()">
+            Deletar Fruta
+          </button>
+          <button class="btn btn-secondary" onclick="sair()">Sair</button>
+        </div>
+
+        <!-- Area onde o JavaScript mostra mensagens e listas -->
+        <section id="resultado-section" class="section">
+          <h3>Resultado</h3>
+          <pre id="resultado-display"></pre>
+        </section>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

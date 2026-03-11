@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* Cores base para facilitar mudancas depois */
+:root {
+    --bg-primary: #F8F8FF;
+    --bg-secondary: #FFFFFF;
+    --border-color: #E0E0E0;
+    --text-dark: #2C3E50;
+    --btn-primary: #3498DB;
+    --btn-success: #27AE60;
+    --btn-danger: #E74C3C;
+    --btn-secondary: #95A5A6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo geral da pagina */
+body {
+    background-color: var(--bg-primary);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dark);
+    line-height: 1.4;
+    padding: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Titulos */
+h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #7F8C8D;
+    font-size: 0.95em;
+    margin-bottom: 15px;
+}
+
+/* Grid dos botoes do menu */
+.button-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9em;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Variantes de botao */
+.btn-primary {
+    background-color: var(--btn-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980B9;
+}
+
+.btn-success {
+    background-color: var(--btn-success);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #229954;
+}
+
+.btn-danger {
+    background-color: var(--btn-danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #C0392B;
+}
+
+.btn-secondary {
+    background-color: var(--btn-secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7F8C8D;
+}
+
+/* Caixa do resultado */
+.section {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+#resultado-display {
+    background-color: var(--bg-primary);
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Ajuste de tela pequena */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .button-menu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
