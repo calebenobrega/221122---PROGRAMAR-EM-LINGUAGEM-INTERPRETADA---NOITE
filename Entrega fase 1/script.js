@@ -3,10 +3,12 @@ let frutas = [];
 let proximoId = 1;
 let usuarioLogado = false;
 
-// Login fixo definido no codigo
+// Usuario unico do sistema
 const USUARIO_SISTEMA = {
-    nome: 'calebe',
-    senha: 'senha'
+    id: 1,
+    nome: 'Calebe',
+    username: 'calebe',
+    password: 'senha'
 };
 
 // Carrega frutas salvas e recalcula o proximo ID
@@ -15,6 +17,7 @@ function carregarDados() {
     if (!dados) return;
 
     frutas = JSON.parse(dados);
+
     if (frutas.length > 0) {
         proximoId = Math.max(...frutas.map((fruta) => fruta.id)) + 1;
     }
@@ -30,11 +33,16 @@ function mostrarResultado(mensagem) {
     document.getElementById('resultado-display').textContent = mensagem;
 }
 
+// Em modo de usuario unico, toda fruta deve pertencer ao ID 1
+function frutaDoUsuario(fruta) {
+    return (fruta.usuarioId || USUARIO_SISTEMA.id) === USUARIO_SISTEMA.id;
+}
+
 // Pede nome e senha ate autenticar
 function login() {
     while (!usuarioLogado) {
-        const nome = prompt('Login\nDigite seu nome:');
-        if (nome === null) {
+        const username = prompt('Login\nDigite seu usuario:');
+        if (username === null) {
             alert('Voce precisa fazer login para entrar.');
             continue;
         }
@@ -45,17 +53,19 @@ function login() {
             continue;
         }
 
-        const nomeCorreto = nome.trim().toLowerCase() === USUARIO_SISTEMA.nome;
-        const senhaCorreta = senha === USUARIO_SISTEMA.senha;
+        const usuarioCorreto = username.trim().toLowerCase() === USUARIO_SISTEMA.username;
+        const senhaCorreta = senha === USUARIO_SISTEMA.password;
 
-        if (nomeCorreto && senhaCorreta) {
+        if (usuarioCorreto && senhaCorreta) {
             usuarioLogado = true;
             alert('Bem-vindo, ' + USUARIO_SISTEMA.nome + '!');
-            mostrarResultado('Login realizado com sucesso!\n\nUsuario: ' + USUARIO_SISTEMA.nome);
+            mostrarResultado(
+                'Login realizado com sucesso!\n\nUsuario: ' + USUARIO_SISTEMA.nome + '\nID do usuario: ' + USUARIO_SISTEMA.id
+            );
             return;
         }
 
-        alert('Nome ou senha invalidos. Tente novamente.');
+        alert('Usuario ou senha invalidos. Tente novamente.');
     }
 }
 
@@ -102,7 +112,8 @@ function adicionarFruta() {
         id: proximoId++,
         nome: nome.trim(),
         valor,
-        quantidade
+        quantidade,
+        usuarioId: USUARIO_SISTEMA.id
     };
 
     frutas.push(novaFruta);
@@ -117,13 +128,15 @@ function adicionarFruta() {
 function listarTudo() {
     if (!verificarLogin()) return;
 
-    if (frutas.length === 0) {
+    const frutasDoUsuario = frutas.filter(frutaDoUsuario);
+
+    if (frutasDoUsuario.length === 0) {
         mostrarResultado('Nenhuma fruta cadastrada.');
         return;
     }
 
-    let texto = 'FRUTAS CADASTRADAS:\n\n';
-    frutas.forEach((fruta) => {
+    let texto = `FRUTAS CADASTRADAS (Usuario ID ${USUARIO_SISTEMA.id}):\n\n`;
+    frutasDoUsuario.forEach((fruta) => {
         texto += `ID: ${fruta.id}\nNome: ${fruta.nome}\nValor: R$ ${fruta.valor.toFixed(2)}\nQuantidade: ${fruta.quantidade}\n\n`;
     });
 
@@ -137,9 +150,9 @@ function listarPorId() {
     const id = pedirNumero('Digite o ID da fruta:');
     if (id === null || id === undefined) return;
 
-    const fruta = frutas.find((item) => item.id === id);
+    const fruta = frutas.find((item) => item.id === id && frutaDoUsuario(item));
     if (!fruta) {
-        mostrarResultado(`Fruta com ID ${id} nao encontrada.`);
+        mostrarResultado(`Fruta com ID ${id} nao encontrada para o seu usuario.`);
         return;
     }
 
@@ -155,9 +168,9 @@ function editarFruta() {
     const id = pedirNumero('Digite o ID da fruta a editar:');
     if (id === null || id === undefined) return;
 
-    const fruta = frutas.find((item) => item.id === id);
+    const fruta = frutas.find((item) => item.id === id && frutaDoUsuario(item));
     if (!fruta) {
-        mostrarResultado(`Fruta com ID ${id} nao encontrada.`);
+        mostrarResultado(`Fruta com ID ${id} nao encontrada para o seu usuario.`);
         return;
     }
 
@@ -200,9 +213,9 @@ function deletarFruta() {
     const id = pedirNumero('Digite o ID da fruta a deletar:');
     if (id === null || id === undefined) return;
 
-    const index = frutas.findIndex((item) => item.id === id);
+    const index = frutas.findIndex((item) => item.id === id && frutaDoUsuario(item));
     if (index === -1) {
-        mostrarResultado(`Fruta com ID ${id} nao encontrada.`);
+        mostrarResultado(`Fruta com ID ${id} nao encontrada para o seu usuario.`);
         return;
     }
 

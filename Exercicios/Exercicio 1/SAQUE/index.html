@@ -14,16 +14,16 @@
             saldo: 1000
         };
         
-        console.log("Nome do cliente: " + conta.nome + "\nSaldo atual: R$" + conta.saldo );
+        console.log(`Nome do cliente: ${conta.nome}\nSaldo atual: R$${conta.saldo}`);
 
         let saque = 2000;
 
         if (saque > conta.saldo) {
-            console.log("Saldo insuficiente para o saque de R$" + saque);
+            console.log(`Saldo insuficiente para o saque de R$${saque}`);
         } else {
             conta.saldo -= saque;
-            console.log("Saque de R$" + saque + " realizado com sucesso.");
-            console.log("Saldo restante: R$" + conta.saldo);
+            console.log(`Saque de R$${saque} realizado com sucesso.`);
+            console.log(`Saldo restante: R$${conta.saldo}`);
         }
     </script>
 

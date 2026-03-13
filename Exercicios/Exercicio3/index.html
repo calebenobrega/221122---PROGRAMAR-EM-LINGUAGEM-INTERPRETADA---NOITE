@@ -134,8 +134,8 @@
       // 2) Evento no quadrado ao passar o mouse
       const quadrado = document.getElementById("quadrado");
       quadrado.addEventListener("mouseenter", () => {
-        quadrado.style.width = parseInt(quadrado.style.width, 10) + 10 + "px";
-        quadrado.style.height = parseInt(quadrado.style.height, 10) + 10 + "px";
+        quadrado.style.width = quadrado.offsetWidth + 10 + "px";
+        quadrado.style.height = quadrado.offsetHeight + 10 + "px";
       });
 
       // 3) Mostrar texto em tempo real
@@ -173,10 +173,8 @@
       const elementoToggle = document.getElementById("elemento-toggle");
 
       botaoAlternarElemento.addEventListener("click", () => {
-        elementoToggle.classList.toggle("oculto");
-
-        const estaOculto = elementoToggle.classList.contains("oculto");
-        botaoAlternarElemento.textContent = estaOculto
+        const oculto = elementoToggle.classList.toggle("oculto");
+        botaoAlternarElemento.textContent = oculto
           ? "Exibir elemento"
           : "Ocultar elemento";
       });
